@@ -1,0 +1,22 @@
+name = "whio-site-utils"
+compatibility_date = "2025-04-06"
+main = "src/index.js"
+[observability.logs]
+enabled = true
+
+# Route for production
+routes = [
+  { pattern = "whio.digital/utils/*", zone_name = "whio.digital" }
+]
+
+[vars]
+# GITHUB_TOKEN is set securely via `wrangler secret put GITHUB_TOKEN`
+
+[[unsafe.bindings]]
+name = "whiodigital_site_ratelimit"
+type = "ratelimit"
+namespace_id = "1029" # Your namespace ID (integer)
+simple = { limit = 5, period = 60 } # 5 requests per 60 seconds
+
+# KV, R2, other bindings can be added here if needed 
+#
